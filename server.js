@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 const app = express();
 app.use(cors());
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.get("/api/flight-price", async (req, res) => {
   const { origin, destination, date } = req.query;
@@ -26,6 +26,7 @@ app.get("/api/flight-price", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+// ✅ Bind to 0.0.0.0 for Koyeb
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server running on port ${PORT}`);
 });
